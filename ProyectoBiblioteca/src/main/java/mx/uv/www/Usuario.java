@@ -4,11 +4,12 @@ public class Usuario {
     String matricula;
     String password;
     String nombre;
-    boolean tipo; //0=Estudiante, 1=Administrador
+    String tipo; 
     
+   
     public Usuario() {
     }
-    public Usuario(String matricula, String password, String nombre, boolean tipo) {
+    public Usuario(String matricula, String password, String nombre, String tipo) {
         this.matricula = matricula;
         this.password = password;
         this.nombre = nombre;
@@ -32,10 +33,10 @@ public class Usuario {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public boolean isTipo() {
+    public String getTipo() {
         return tipo;
     }
-    public void setTipo(boolean tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

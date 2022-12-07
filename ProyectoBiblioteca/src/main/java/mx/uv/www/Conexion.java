@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class Conexion {
     private static String url = "jdbc:mysql://127.0.0.1:3306/ProyectoBiblioteca";
     private static String driverName = "com.mysql.jdbc.Driver"; // com.mysql.cj.jdbc.Driver
