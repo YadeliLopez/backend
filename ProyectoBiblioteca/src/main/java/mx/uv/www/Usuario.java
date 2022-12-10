@@ -9,10 +9,10 @@ public class Usuario {
    
     public Usuario() {
     }
-    public Usuario(String matricula, String password, String nombre, String tipo) {
+    public Usuario(String matricula, String nombre, String password, String tipo) {
         this.matricula = matricula;
-        this.password = password;
         this.nombre = nombre;
+        this.password = password;
         this.tipo = tipo;
     }
     public String getMatricula() {
