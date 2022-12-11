@@ -27,10 +27,10 @@
       <img src="imagens/logo_vetor.png" class=" img-responsive image-circle">
       <h1 class="text-center">Biblioteca Virtual</h1>
       
-      <form action="libros.html">
+      <form method="post" action="libros.html">
         <div class="input-group">
           <span class="input-group-addon"><i class="fas fa-user"></i></span>
-          <input name="text" id="matricula" type="usuario" class="form-control" placeholder="Usuario" required="">
+          <input name="text" id="usuario" type="usuario" class="form-control" placeholder="Usuario" required="">
         </div>
 
         <div class="input-group">
@@ -38,7 +38,7 @@
           <input name="password" id="password" type="password" class="form-control" placeholder="Password" required="">
         </div>
 
-        <button type="submit" id="Login" class="btn btn-block btn-primary">
+        <button type="submit" id="Login" class="btn btn-block btn-primary" onclick=go()>
           <i class="fas fa-sign-in-alt"></i>
           Entrar
         </button> 
@@ -50,11 +50,23 @@
     <!--Login-Box-->
   </div><!-- Container -->
  
+  <script>
+    function go(){
+      var nombre = document.getElementById("usuario").value
+      var password = document.getElementById("password").value
+      if(nombre =='yadeli' && password == '123456'){
+        console.log("Bienvenido")
+        location.replace("libros.html")
+      }else{
+        alert("Usuario o contraseña incorrectos");
+      }
+    }
+  </script>
 
-  <!-- <script src="https://kit.fontawesome.com/b63d24bedf.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Bootstrap JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script src="https://kit.fontawesome.com/b63d24bedf.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+  <!-- Bootstrap JavaScript 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
 </body>
 </html>
