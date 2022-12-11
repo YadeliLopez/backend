@@ -2,8 +2,8 @@ package mx.uv.www;
 
 import static spark.Spark.*;
 
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 
 import com.google.gson.Gson;
 
@@ -16,8 +16,8 @@ import com.google.gson.Gson;
 public class App {
 
     public static Gson gson = new Gson();
-    private static Map<String, Usuario> usuarios = new HashMap<>();
-    // private static Conexion c;
+    //private static Map<String, Usuario> usuarios = new HashMap<>();
+    //private static Conexion c;
 
     public static void main(String[] args) {
         //intentar conectar a la BD
@@ -40,26 +40,15 @@ public class App {
             });
             
         before((req, res)-> res.header("Access-Control-Allow-Origin", "*"));
-        System.out.println("Hello World!");
-        Usuario u1 = new Usuario("1", "Pedro", "1234","?");
-        Usuario u2 = new Usuario("2", "Pablo", "7890","?");
-
-        usuarios.put(u1.getMatricula(), u1);
-        usuarios.put(u2.getMatricula(), u2);
+        
 
         before((req, res)-> res.type("application/json"));
-        // devolver un usuario
-        // get("/", (req, res) -> gson.toJson(u1) ); 
-        // devolver lista de usuarios
-        // get("/", (req, res) -> gson.toJson(usuarios) );
-        get("/usuarios", (req, res) -> gson.toJson(DAO.consultaUsuarios()) );
-        // get("/", (req, res) -> u1.getNombre() );
+        get("/resources", (req, res) -> gson.toJson(DAO.consultaUsuarios()) );
+    
 
         post("/", (req,res)->{
             String datosUsuario = req.body();
             Usuario u = gson.fromJson(datosUsuario, Usuario.class);
-            // usuarios.put(u.getId(), u);
-            // return "listo se ingreso el usuario "+u.getId();
             return DAO.registrarUsuario(u);
         });
 
