@@ -1,12 +1,12 @@
 package mx.uv.www;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 
 // Data Access Object
 public class DAO {
@@ -21,9 +21,7 @@ public class DAO {
         ResultSet rs = null;
         Connection conn = null;
         List<Usuario> resultado = new ArrayList<>();
-
         conn = c.getConnection();
-
         try {
             String sql = "SELECT * from usuarios";
             stm = (Statement) conn.createStatement();
@@ -139,8 +137,6 @@ public class DAO {
         String msj="";
 
         conn=c.getConnection();
-
-    
         try {
             String sql="UPDATE usuarios SET matricula = ?, nombre = ?, password = ?, tipo =? where matricula = ?";
             stm = (PreparedStatement) conn.prepareStatement(sql);
@@ -296,8 +292,6 @@ public static String registrarLibro(Libro L){
         String msj="";
 
         conn=c.getConnection();
-
-    
         try {
             String sql="UPDATE libros SET isbn = ?, titulo = ?, autor = ?, tipo =? where isbn = ?";
             stm = (PreparedStatement) conn.prepareStatement(sql);

@@ -47,7 +47,7 @@
       <div class="panel panel-default">
       
       
-      <form>
+      <form id="formRegistro">
         <legend class="text-center">Registro de Usuario</legend>
 
         <div class="row">
@@ -77,7 +77,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="password">Contraseña</label>
-              <input type="text" maxlength="10" placeholder="Password" required="" class="form-control">
+              <input type="text" maxlength="10" id="password" placeholder="Password" required="" class="form-control">
             </div>
           </div>
 
@@ -85,7 +85,7 @@
         
         </div>
 
-        <button type="submit" id="registro" class="btn btn-primary btn-block">Registrar</button>
+        <button type="submit" id="btnRegistro" class="btn btn-primary btn-block">Registrar</button>
 
       </form>
       
@@ -96,27 +96,28 @@
 
 
   <script>
-    var bRegistro = document.getElementById("registro")
-        bRegistro.addEventListener("click", function () {
-        let matricula_ = document.getElementById("matricula").value
-        let nombre_ = document.getElementById("nombre").value
-        let password_ = document.getElementById("password").value
-        let tipo_ = document.getElementById("tipo").value
-        console.log(matricula_ + " " + password_)
-        axios.post("http://localhost", {
-            matricula: matricula_,
-            nombre:nombre_,
-            password: password_,
-            tipo:tipo_
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    var btnRegistro = document.getElementById("btnRegistro")
+    btnRegistro.addEventListener("click", function(){
+      let nombre = document.getElementById("nombre").value
+      let matricula = document.getElementById("matricula").value
+      let password = document.getElementById("password").value
+      let tipo = document.getElementById("tipo").value
+      console.log(nombre + " " + matricula + " " + password + " " + tipo)
+      axios.post("http://localhost", {
+        nombre: nombre,
+        matricula: matricula,
+        password: password,
+        tipo: tipo
+      })
+      .then(function(response){
+        console.log(response);
+      })
+      .catch(function(error){
+        console.log(error);
+      });
     })
-    </script>
+ 
+  </script>
 
 
   <!-- jQuery -->
