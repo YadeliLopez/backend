@@ -13,6 +13,8 @@ public class DAO {
     //se hace la conexion con la base de datos
     private static Conexion c = new Conexion();
 
+
+
 //* ******************************************************************************************************* */
 //CRUD USUARIOS
     // este metodo regresa un conjunto de usuarios que cumpla un criterio
@@ -96,6 +98,44 @@ public class DAO {
         }
         return msj;
     }
+
+  /*    public int validarUsuario(Usuario usuario) throws Exception{
+        Statement stm;
+        ResultSet usuarios;
+        String sql = "select * from usuario;";
+        
+        try (Connection conn = conexion.getConnection();){
+            stm = conn.createStatement();
+            usuarios = stm.executeQuery(sql);
+            System.out.println(usuarios);
+            while (usuarios.next()){
+                Usuario u = new Usuario(usuarios.getString("matricula"), usuarios.getString("password"), usuarios.getString("tipo"));
+                
+                    if(usuarios.getString("matricula").equals(u.getMatricula()) && usuarios.getString("password").equals(u.getPassword())){
+                        if (usuarios.getString("tipo").equals(u.getTipo())){
+                            System.out.println("INGRESO CON EXITO");
+                            if (usuarios.getString("tipo").equals(u.getTipo())){
+                                return 1;
+                            }                      
+                        }else{
+                            System.out.println("INGRESO SIN EXITO");
+                            return 0;
+                        }
+                    }else{
+                        System.out.println("INGRESO SIN EXITO");
+                        return 0;
+                    }
+                
+            }
+        }catch (SQLException e) {
+            throw new Exception("Error en readAll SQLException " + e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Error en readAll Exception " + e.getMessage());
+        }
+        return -1;
+    }*/
+
+
 
     public static String eliminaUsuario(String matricula){
         PreparedStatement stm = null;

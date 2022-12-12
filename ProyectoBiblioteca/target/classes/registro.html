@@ -94,7 +94,7 @@
     </div>
   </section>
 
-
+  
   <script>
     var btnRegistro = document.getElementById("btnRegistro")
     btnRegistro.addEventListener("click", function(){
@@ -103,7 +103,7 @@
       let password = document.getElementById("password").value
       let tipo = document.getElementById("tipo").value
       console.log(nombre + " " + matricula + " " + password + " " + tipo)
-      axios.post("http://localhost", {
+      axios.post("http://localhost:80/usuarios", {
         nombre: nombre,
         matricula: matricula,
         password: password,
@@ -118,6 +118,8 @@
     })
  
   </script>
+
+  
 
 
   <!-- jQuery -->

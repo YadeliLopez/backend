@@ -6,23 +6,29 @@ import java.sql.SQLException;
 
 
 public class Conexion {
+    /*private String url = "jdbc:mysql://localhost:3306/proyectobiblioteca";
+    private String username = "root";
+    private String password = "";
+    private String driverName = "com.mysql.jdbc.Driver";*/
 
-    private static String url = "jdbc:mysql://127.0.0.1:3306/proyectobiblioteca";
-    private static String driverName = "com.mysql.cj.jdbc.Driver"; // com.mysql.cj.jdbc.Driver
-    private static String username = "root";
-    private static String password = "Cataleya2906";
-    // variable de conexion
-    private static Connection connection = null;
+    private String url = "jdbc:mysql://db4free.net:3306/biblioteca4sw?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+    private String username = "equipo4sw";
+    private String password = "equipo4sw";
+    private String driverName = "com.mysql.jdbc.Driver";
 
-    public Connection getConnection(){
+    public Connection getConnection() {
+        Connection conn = null;
         try {
             Class.forName(driverName);
-            connection = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(url,username,password);
+            System.out.println("Se estableció la conexión!");
         } catch (SQLException e) {
-            System.out.println(" SQL:" + e);
-        } catch (ClassNotFoundException e){
-            System.out.println("Driver:" + e);
+            System.out.println("Falló con la conexion");
+            System.out.println(e);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Falló la carga de la clase del JDBC");
+            e.printStackTrace();
         }
-        return connection;
+        return conn;
     }
 }

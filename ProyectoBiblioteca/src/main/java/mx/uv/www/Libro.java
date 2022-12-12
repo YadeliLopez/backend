@@ -1,15 +1,17 @@
 package mx.uv.www;
 
 public class Libro {
+    String isbn;
     String titulo;
     String autor;
-    String isbn;
+   
 
     
-    public Libro(String titulo, String autor, String isbn) {
+   
+    public Libro(String isbn, String titulo, String autor) {
+        this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
-        this.isbn = isbn;
     }
 
     public Libro() {

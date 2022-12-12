@@ -78,18 +78,18 @@
                      <div class="table-responsive"><table class="table table-striped table-condensed ">
                            <thead>
                               <tr>
+                                <<th>Numero</th>
                                 <<th>Nombre</th>
                                  <th>Matricula</th>
-                                 <th>Password</th>
                                  <th>Tipo de Usuario</th>
                                  <th>Libro prestado</th>
                               </tr>
                            </thead>
-                           <tbody>
+                           <tbody id="tablaUsuarios">
                               <tr>
-                                 <td>Claudia López</td>
+                                    <td>0</td>
+                                    <td>Claudia López</td>
                                     <td>S56235425</td>
-                                    <td>hmkgmhkg</td>
                                     <td>Estudiante</td>
                                     <td>Geografia 1</td>
                                     <td><span class="label label-success"></span></td>
@@ -120,29 +120,32 @@
 
                         <div class="form-group col-md-6">
                            <label>Usuario</label>
-                           <input class="form-control" type="text" nome="Usuario" placeholder="Nombre">
-                        </div>            
-
-                        <div class="form-group col-md-6">
-                           <label for="matricula">Matricula</label>
-                           <input class="form-control" type="text" name="Matricula" id="matricula"
-                              placeholder="Matricula">
-                        </div>
-
-                        <div class="form-group col-md-2">
-                           <label for="password">Password</label>
-                           <input class="form-control" type="text" maxlength="8" id="password" placeholder="Password">
-                        </div>
+                           <input class="form-control" type="text" name="Usuario" id="nombreAD" placeholder="Nombre">
+                        </div>   
 
                         <div class="form-group col-md-6">
                            <label>Tipo de Usuario</label>
-                           <select name="" id="tipousuario" class="form-control">
+                           <select name="" id="tipousuarioAD" class="form-control">
                               <option value="">Seleccione</option>
                               <option value="1">Estudiante</option>
                               <option value="2">Administrador</option>
                            </select>
                         </div>
-                     <button type="submit" id="nuevoUsuario" class="btn btn-primary btn-block" src="">Registrar</button>
+
+                        <div class="form-group col-md-6">
+                           <label for="matricula">Matricula</label>
+                           <input class="form-control" type="text" name="Matricula" id="matriculaAD"
+                              placeholder="Matricula">
+                        </div>
+
+                                 
+                        <div class="form-group col-md-2">
+                           <label for="password">Password</label>
+                           <input class="form-control" type="text" maxlength="8" id="passwordAD" placeholder="Password">
+                        </div>
+
+                        
+                     <button type="submit" id="btnRegistroAD" class="btn btn-primary btn-block" src="">Registrar</button>
 
                   </form>
                </div>
@@ -185,7 +188,7 @@
                            <input type="file" id="img" class="form-control">
                         </div>-->
 
-                        <button type="button" id="registroLibro" class="btn btn-success">Enviar</button>
+                        <button type="submit" id="registroLibro" class="btn btn-success">Enviar</button>
 
                      </form>
                   </div>
@@ -204,44 +207,79 @@
 
    <!--REGISTRO DE USUARIO NUEVO-->
    <script>
-    var bNuevoUsuario = document.getElementById("registro")
-         
-        bNuevoUsuarioaddEventListener("click", function () {
-        let matricula_ = document.getElementById("matricula").value
-        let nombre_ = document.getElementById("nombre").value
-        let password_ = document.getElementById("password").value
-        let tipo_ = document.getElementById("tipo").value
-        console.log(matricula_ + " " + password_)
-        axios.post("http://localhost", {
-            matricula: matricula_,
-            nombre:nombre_,
-            password: password_,
-            tipo:tipo_
+      var btnRegistroAD = document.getElementById("btnRegistroAD")
+      btnRegistroAD.addEventListener("click", function(){
+        let nombreAD = document.getElementById("nombreAD").value
+        let matriculaAD = document.getElementById("matriculaAD").value
+        let passwordAD = document.getElementById("passwordAD").value
+        let tipoAD = document.getElementById("tipoAD").value
+        console.log(nombreAD + " " + matriculaAD + " " + passwordAD + " " + tipoAD)
+        axios.post("http://localhost:80/usuarios", {
+          nombre: nombreAD,
+          matricula: matriculaAD,
+          password: passwordAD,
+          tipo: tipoAD
         })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    })
+        .then(function(response){
+          console.log(response);
+        })
+        .catch(function(error){
+          console.log(error);
+        });
+      })
     </script>
 
 
 <!--CONSULTA DE USUARIOS-->
    <script>
+var querystring = window.location.search;
+var parametros = new URLSearchParams(querystring);
 
+idUsuarios= parametros.get("Usuario");
+nombre = parametros.get("nombre");
+
+axios.get("http://localhost:80/usuarios")
+    .then(function (res) {
+        let json = res.data;
+        let tablaUsuario = document.getElementById("tablaUsuarios");
+        var num =1;
+        let titulo = document.getElementById("titulo");
+        titulo.innerHTML=nombre;
+        for (var clave in json) {
+            if (json.hasOwnProperty(clave)) {
+                let fila = document.createElement("tr");
+                var col1 = document.createElement("th");
+                col1.innerHTML = num;
+                var col2 = document.createElement("td");
+                col2.innerHTML = json[clave].nombre;
+                var col3 = document.createElement("td");
+                col3.innerHTML = json[clave].matricula;
+                var col4 = document.createElement("td");
+                col4.innerHTML = json[clave].tipo;
+                var col5 = document.createElement("td");
+                col5.innerHTML = json[clave].libroPrestado;
+
+                tablaUsuario.appendChild(fila);
+                fila.appendChild(col1);
+                fila.appendChild(col2);
+                fila.appendChild(col3);
+                fila.appendChild(col4);
+                num = num +1;
+            }
+        }
+    })
+    .catch()
    </script>
 
 <!--REGISTRO DE LIBRO NUEVO-->
-<script>
-   var bNuevoLibro= document.getElementById("registroLibro")
-       bNuevoLibroaddEventListener("click", function () {
+   <script>
+   var bNuevoLibro= document.getElementById("registroLibro");
+       bNuevoLibro.addEventListener("click", function () {
        let isbn_ = document.getElementById("isbn").value
        let titulo_ = document.getElementById("titulo").value
        let autor_ = document.getElementById("autor").value
-       console.log(isbn_ + " " + titulo_)
-       axios.post("http://localhost", {
+       console.log(isbn_ + " " + titulo_ + " "+autor_ )
+       axios.post("http://localhost:80/libros", {
            isbn: isbn_,
            titulo:titulo_,
            autor: autor_,
