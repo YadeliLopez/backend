@@ -275,14 +275,14 @@ axios.get("http://localhost:80/usuarios")
    <script>
    var bNuevoLibro= document.getElementById("registroLibro");
        bNuevoLibro.addEventListener("click", function () {
-       let isbn_ = document.getElementById("isbn").value
-       let titulo_ = document.getElementById("titulo").value
-       let autor_ = document.getElementById("autor").value
-       console.log(isbn_ + " " + titulo_ + " "+autor_ )
+       let isbn = document.getElementById("isbn").value
+       let titulo = document.getElementById("titulo").value
+       let autor = document.getElementById("autor").value
+       console.log(isbn+ " " + titulo+ " "+autor)
        axios.post("http://localhost:80/libros", {
-           isbn: isbn_,
-           titulo:titulo_,
-           autor: autor_,
+           isbn: isbn,
+           titulo:titulo,
+           autor: autor,
        })
            .then(function (response) {
                console.log(response);

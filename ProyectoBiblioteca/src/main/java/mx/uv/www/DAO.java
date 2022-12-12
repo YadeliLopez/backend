@@ -99,7 +99,7 @@ public class DAO {
         return msj;
     }
 
-  /*    public int validarUsuario(Usuario usuario) throws Exception{
+  /* public int validarUsuario(Usuario usuario) throws Exception{
         Statement stm;
         ResultSet usuarios;
         String sql = "select * from usuario;";
