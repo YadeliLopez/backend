@@ -52,6 +52,8 @@ public class App {
             return DAO.registrarUsuario(u);
         });
 
+        
+
 
     }
 }
